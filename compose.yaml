@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  wiremock:
+    image: rodolpheche/wiremock
+    container_name: wiremock
+    ports:
+      - "8080:8080" # Expose WireMock on port 8080
+    volumes:
+      - /Users/bhaa.rizik/workspace/demo/component-test/src/test/resources/mappings:/home/wiremock/mappings # Mount a local directory for mappings
+      - /Users/bhaa.rizik/workspace/demo/component-test/src/test/resources/__files:/home/wiremock/__files # Mount a local directory for response bodies
+    environment:
+      - WIREMOCK_OPTS=--verbose # Enable verbose logging (remove or adjust as needed)
+      - DEBUG=true  # Enable debug mode
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379" # Expose Redis on port 6379
+
+  app:
+    build: .
+    ports:
+      - "8081:8080" # Change the port to avoid conflict with WireMock
+    depends_on:
+      - wiremock
+      - redis
+    environment:
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379

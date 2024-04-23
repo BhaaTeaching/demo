@@ -1,0 +1,14 @@
+{
+    "request": {
+      "method": "GET",
+      "url": "/posts/1"
+    },
+    "response": {
+      "status": 200,
+      "bodyFileName": "hello-world-body.json",
+      "headers": {
+        "Content-Type": "text/plain"
+      }
+    }
+  }
+  
