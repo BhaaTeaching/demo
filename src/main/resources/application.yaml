@@ -3,3 +3,18 @@ server:
   redis:
     host: redis
     port: 6379
+
+cloud:
+  aws:
+    credentials:
+      access-key: AKIA3QIGZOTUAD2P5BNO
+      secret-key: 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
+    region:
+      static: us-east-1
+    stack:
+      auto: false
+
+
+app:
+  bucket:
+    name: documents-upload-download
